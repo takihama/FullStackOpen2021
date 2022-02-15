@@ -9,7 +9,7 @@ const App = () => {
   const setGoodValue = (value) => {
     setGood(value)
   }
-  const setNeutralValue = (value) => {
+    const setNeutralValue = (value) => {
     setNeutral(value)
   }
   const setBadValue = (value) => {
@@ -30,6 +30,9 @@ const App = () => {
       <DisplayText text="Good" value={good} />
       <DisplayText text="Neutral" value={neutral} />
       <DisplayText text="Bad" value={bad} />
+      <DisplayText text="All" value={good + neutral + bad} />
+      <DisplayText text="Average" value={(good - bad)/(good + neutral + bad)}/>
+      <DisplayText text="Positive" value={good/(good + neutral + bad)*100 + '%'} />
 
     </div>
   )
@@ -49,7 +52,7 @@ const DisplayText = ({ text, value }) => (
 
 const DisplayTitle = ({ text }) => (
   <div>
-    <h2>{text}</h2>
+    <h2>{text}</h2  >
   </div>
 )
 
