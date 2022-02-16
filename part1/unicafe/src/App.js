@@ -37,10 +37,17 @@ const Button = ({ text, onClick }) => (
   </button>
 )
 
-const DisplayText = ({ text, value }) => (
+const DisplayText = ({ text }) => (
   <div>
-    <p>{text} {value}</p>
+    <p>{text}</p>
   </div>
+)
+
+const StatisticsLine = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 )
 
 const DisplayTitle = ({ text }) => (
@@ -52,14 +59,19 @@ const DisplayTitle = ({ text }) => (
 const Statistics = ({ good, neutral, bad }) => {
   if (good > 0 || neutral > 0 || bad > 0) {
     return (
-      <div>
-        <DisplayText text="Good" value={good} />
-        <DisplayText text="Neutral" value={neutral} />
-        <DisplayText text="Bad" value={bad} />
-        <DisplayText text="All" value={good + neutral + bad} />
-        <DisplayText text="Average" value={(good - bad) / (good + neutral + bad)} />
-        <DisplayText text="Positive" value={good / (good + neutral + bad) * 100 + '%'} />
-      </div>
+      <table>
+        <thead>
+          
+        </thead>
+        <tbody>
+          <StatisticsLine text="Good" value={good} />
+          <StatisticsLine text="Neutral" value={neutral} />
+          <StatisticsLine text="Bad" value={bad} />
+          <StatisticsLine text="All" value={good + neutral + bad} />
+          <StatisticsLine text="Average" value={(good - bad) / (good + neutral + bad)} />
+          <StatisticsLine text="Positive" value={good / (good + neutral + bad) * 100 + '%'} />
+        </tbody>
+      </table>
     )
   }
   return (
