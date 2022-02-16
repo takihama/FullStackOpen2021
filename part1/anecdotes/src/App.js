@@ -20,9 +20,9 @@ const App = () => {
     const max = Math.max(...anecdotesScores)
     return anecdotesScores.indexOf(max)
   }
-  const voteAnecdote = (index) => {
+  const voteAnecdote = () => {
     const copyScores = [...anecdotesScores]
-    copyScores[index.selected] += 1
+    copyScores[selected] += 1
     setAnecdotesScores(copyScores)
   }
 
@@ -32,7 +32,7 @@ const App = () => {
       <DisplayText text={anecdotes[selected]} />
       <DisplayText text={'Has ' + anecdotesScores[selected] + ' scores'} />     
       
-      <Button text="vote" onClick={() => voteAnecdote({ selected })} />
+      <Button text="vote" onClick={() => voteAnecdote()} />
       <Button text="next anecdote" onClick={() => randomAnecdote()} />
 
       <DisplayTitle text="Anecdote with most votes" />
