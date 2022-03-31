@@ -21,14 +21,14 @@ const Phonebook = () => {
       phonebookService
         .create(person)
         .then(personAdded => {
-          setPersons(persons.concat(personAdded))
-          setNewName('')
-          setNewNumber('')
-          setAlertMessage({ message: `Added ${person.name}.`, type: 'success' })
-          setTimeout(() => setAlertMessage({ message: null, type: null }), 5000)
+            setPersons(persons.concat(personAdded))
+            setNewName('')
+            setNewNumber('')
+            setAlertMessage({ message: `Added ${person.name}.`, type: 'success' })
+            setTimeout(() => setAlertMessage({ message: null, type: null }), 5000)
         })
         .catch(error => {
-          setAlertMessage({ message: `An error occurred when trying to add ${person.name}.`, type: 'error' })
+          setAlertMessage({ message: `An error occurred when trying to add ${person.name}, error: ${error.response.data.error}`, type: 'error' })
           setTimeout(() => setAlertMessage({ message: null, type: null }), 5000)
         })
     }

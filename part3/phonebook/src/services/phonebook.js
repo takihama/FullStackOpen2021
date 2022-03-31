@@ -22,4 +22,5 @@ const remove = (id) => {
     .then(response => response.data)
 } 
 
-export default { getAll, create, update, remove }
+const phonebookService = { getAll, create, update, remove }
+export default phonebookService
