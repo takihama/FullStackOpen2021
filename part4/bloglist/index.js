@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const { MONGODB_URL, PORT } = require('./utils/config')
 const { info, error } = require('./utils/logger')
 const Blog = require('./models/blog')
+const middleware = require('./utils/middleware')
 
 mongoose.connect(MONGODB_URL)
   .then(() => {
@@ -35,6 +36,9 @@ app.post('/api/blogs', (request, response) => {
       response.status(201).json(result)
     })
 })
+
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
 
 app.listen(PORT, () => {
   info(`Server running on port ${PORT}`)
