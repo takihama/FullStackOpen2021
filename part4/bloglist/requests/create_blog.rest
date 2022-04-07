@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json 
+
+{
+  "title": "Fullstackopen rocks",
+  "author": "Daniel Calderón",
+  "url": "http://noexistentblog.com",
+  "likes": 0
+}
