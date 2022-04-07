@@ -3,8 +3,8 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-const {MONGODB_URL, PORT} = require('./utils/config')
-
+const { MONGODB_URL, PORT } = require('./utils/config')
+const { info, error } = require('./utils/logger')
 
 const blogSchema = new mongoose.Schema({
   title: String,
@@ -17,10 +17,10 @@ const Blog = mongoose.model('Blog', blogSchema)
 
 mongoose.connect(MONGODB_URL)
   .then(() => {
-    console.log('Connected to MongoDB')
+    info('Connected to MongoDB')
   })
-  .catch((error) => {
-    console.log('Error connecting to MongoDB:', error.message)
+  .catch(err => {
+    error('Error connecting to MongoDB:', err.message)
   })
 
 app.use(cors()) // Allow requests from multiple origins
@@ -36,14 +36,14 @@ app.get('/api/blogs', (request, response) => {
 
 app.post('/api/blogs', (request, response) => {
   const blog = new Blog(request.body)
-  
+
   blog
-  .save()
-  .then(result => {
-    response.status(201).json(result)
-  })
+    .save()
+    .then(result => {
+      response.status(201).json(result)
+    })
 })
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  info(`Server running on port ${PORT}`)
 })
