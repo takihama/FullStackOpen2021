@@ -7,6 +7,7 @@ const { MONGODB_URL, PORT } = require('./utils/config')
 const { info, error } = require('./utils/logger')
 const Blog = require('./models/blog')
 const middleware = require('./utils/middleware')
+const blogsRouter = require('./controllers/blogs')
 
 mongoose.connect(MONGODB_URL)
   .then(() => {
@@ -19,24 +20,7 @@ mongoose.connect(MONGODB_URL)
 app.use(cors()) // Allow requests from multiple origins
 app.use(express.json())
 
-app.get('/api/blogs', (request, response) => {
-  Blog
-    .find({})
-    .then(blogs => {
-      response.json(blogs)
-    })
-})
-
-app.post('/api/blogs', (request, response) => {
-  const blog = new Blog(request.body)
-
-  blog
-    .save()
-    .then(result => {
-      response.status(201).json(result)
-    })
-})
-
+app.use('/api/blogs', blogsRouter)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
