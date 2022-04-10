@@ -20,6 +20,14 @@ const mostFamousAuthor = (authors) => {
   })
 }
 
+const mostLikedAuthor = (authors) => {
+  if (authors.length === 0) return null
+
+  return authors.reduce((prev, curr) => {
+    return prev.likes > curr.likes ? prev : curr
+  })
+}
+
 const mostBlogs = (blogs) => {
   return mostFamousAuthor(blogs.reduce((prev, curr) => {
     if (!prev.find(blog => blog.author === curr.author)) {
@@ -35,8 +43,24 @@ const mostBlogs = (blogs) => {
   }, []))
 }
 
+const mostLikes = (blogs) => {
+  return mostLikedAuthor(blogs.reduce((prev, curr) => {
+    if (!prev.find(blog => blog.author === curr.author)) {
+      prev.push({
+        author: curr.author,
+        likes: curr.likes
+      })
+    }
+    else {
+      prev[prev.findIndex(o => o.author === curr.author)].likes += curr.likes
+    }
+    return prev
+  }, []))
+}
+
 module.exports = {
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
