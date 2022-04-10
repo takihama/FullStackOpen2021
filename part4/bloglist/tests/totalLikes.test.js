@@ -59,7 +59,7 @@ const blogs = [
     url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
     likes: 2,
     __v: 0
-  }  
+  }
 ]
 
 describe('total likes', () => {
@@ -87,5 +87,25 @@ describe('favorite blog', () => {
 
   test('of a bigger list returns the favorite', () => {
     expect(listHelper.favoriteBlog(blogs)).toEqual(blogs[2])
+  })
+})
+
+describe('most blogs', () => {
+  test('of empty list is null', () => {
+    expect(listHelper.mostBlogs([])).toEqual(null)
+  })
+
+  test('when list has only one blog, return that author with one blog', () => {
+    expect(listHelper.mostBlogs(listWithOneBlog)).toEqual({
+      author: 'Edsger W. Dijkstra',
+      blogs: 1
+    })
+  })
+
+  test('of a bigger list return the author with most blogs', () => {
+    expect(listHelper.mostBlogs(blogs)).toEqual({
+      author: 'Robert C. Martin',
+      blogs: 3
+    })
   })
 })
