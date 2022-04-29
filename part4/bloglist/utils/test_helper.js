@@ -28,6 +28,10 @@ const auxBlogMissingLikes = {
   url: 'http://checkingmissinglikes.com'
 }
 
+const auxInvalidBlog = {
+  author: 'Axel',
+}
+
 const nonExistingId = async () => {
   const blog = new Note({ title: 'willremovethissoon', author: 'remover', url: 'removeLink', likes: 0 })
   await blog.save()
@@ -42,5 +46,5 @@ const blogsInDb = async () => {
 }
 
 module.exports = {
-  initialBlogs, auxBlog, auxBlogMissingLikes, nonExistingId, blogsInDb
+  initialBlogs, auxBlog, auxBlogMissingLikes, auxInvalidBlog, nonExistingId, blogsInDb
 }

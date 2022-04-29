@@ -62,6 +62,14 @@ test('a blog missing likes is added with 0 likes', async () => {
     expect(missingLikesBlog.likes).toBe(0)
 })
 
+test('an invalid blog returns error', async () => {
+  await api
+    .post('/api/blogs')
+    .send(helper.auxInvalidBlog)
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+})
+
 // Close connection after all tests finished
 afterAll(() => {
   mongoose.connection.close()
