@@ -48,6 +48,20 @@ test('a valid blog can be added', async () => {
   expect(titles).toContain(helper.auxBlog.title)
 })
 
+test('a blog missing likes is added with 0 likes', async () => {
+  await api
+    .post('/api/blogs')
+    .send(helper.auxBlogMissingLikes)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd =  await helper.blogsInDb()
+
+    const missingLikesBlog = blogsAtEnd.find(b => b.title === helper.auxBlogMissingLikes.title)
+    console.log(missingLikesBlog)
+    expect(missingLikesBlog.likes).toBe(0)
+})
+
 // Close connection after all tests finished
 afterAll(() => {
   mongoose.connection.close()
