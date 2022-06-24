@@ -8,9 +8,20 @@ blogsRouter.get('/', async (request, response) => {
 
 blogsRouter.post('/', async (request, response) => {
   const blog = new Blog(request.body)
-  
+
   const savedResult = await blog.save()
   response.status(201).json(savedResult)
-})  
+})
+
+blogsRouter.delete('/:id', async (request, response) => {
+  const deletedBlog = await Blog.findByIdAndRemove(request.params.id)
+
+  if (deletedBlog) {
+    response.status(204).end()
+  }
+  else {
+    response.status(404).end()
+  }
+})
 
 module.exports = blogsRouter
