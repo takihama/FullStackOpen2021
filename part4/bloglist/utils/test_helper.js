@@ -15,6 +15,13 @@ const initialBlogs = [
   }
 ]
 
+const auxUpdateBlog = {
+  title: 'Checking update',
+  author: 'Axel',
+  url: 'http://checkingupdate.com',
+  likes: 71
+}
+
 const auxBlog = {
   title: 'Checking post',
   author: 'Daniel',
@@ -46,5 +53,11 @@ const blogsInDb = async () => {
 }
 
 module.exports = {
-  initialBlogs, auxBlog, auxBlogMissingLikes, auxInvalidBlog, nonExistingId, blogsInDb
+  initialBlogs,
+  auxBlog,
+  auxBlogMissingLikes,
+  auxInvalidBlog,
+  auxUpdateBlog,
+  nonExistingId,
+  blogsInDb
 }
