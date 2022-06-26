@@ -12,6 +12,21 @@ const auxUser = {
   password: 'danielito'
 }
 
+const auxInvalidUser = {
+  user: 'daniel',
+  password: 'carlos'
+}
+
+const auxInvalidPassoword = {
+  username: 'pepito',
+  password: 'ma'
+}
+
+const auxInvalidUsername = {
+  username: 'jo',
+  password: 'mariana'
+}
+
 const usersInDb = async () => {
   const users = await User.find({})
   return users.map(user => user.toJSON())
@@ -19,6 +34,9 @@ const usersInDb = async () => {
 
 module.exports = {
   initialUser,
+  auxInvalidUser,
+  auxInvalidPassoword,
+  auxInvalidUsername,
   auxUser,
   usersInDb
 }

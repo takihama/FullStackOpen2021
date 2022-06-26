@@ -46,6 +46,31 @@ describe('when there is initially one user in db', () => {
   })
 })
 
+describe('addition of a new user', () => {
+  test('an invalid user returns error', async () => {
+    await api
+      .post('/api/users')
+      .send(helper.auxInvalidUser)
+      .expect(400)
+  })
+
+  test('creation fails with invalid password', async () => {
+    const response = await api
+      .post('/api/users')
+      .send(helper.auxInvalidPassoword)
+      .expect(400)
+
+    expect(response.body.error).toBe('password must have at least 3 characters')
+  })
+
+  test('creation fails with invalid username', async () => {
+    await api
+      .post('/api/users')
+      .send(helper.auxInvalidUsername)
+      .expect(400)
+  })
+})
+
 // Close connection after all tests finished
 afterAll(() => {
   mongoose.connection.close()
