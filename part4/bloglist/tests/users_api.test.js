@@ -69,6 +69,15 @@ describe('addition of a new user', () => {
       .send(helper.auxInvalidUsername)
       .expect(400)
   })
+
+  test('creation fails with existing username', async () => {
+    const response = await api
+      .post('/api/users')
+      .send(helper.initialUser)
+      .expect(400)
+
+    expect(response.body.error).toBe('username must be unique')
+  })
 })
 
 // Close connection after all tests finished
